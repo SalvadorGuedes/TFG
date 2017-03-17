@@ -2,3 +2,6 @@ index:
     path:   /general/index
     defaults: { _controller: generalBundle:general:index }
     
+fileExplore:
+    path: /general/form
+    defaults: { _controller: generalBundle:general:form }
