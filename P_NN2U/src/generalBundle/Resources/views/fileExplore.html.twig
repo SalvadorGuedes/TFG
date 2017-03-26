@@ -1,5 +1,23 @@
 {# empty Twig template #}
-<h2>Formulario con Symfony3</h2>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<div class="general"
+    <h2>Formulario con Symfony3 22 </h2>
+    {{ form_start(form, {'action': path("vinculador"), 'method': 'POST'}) }}
+            {{form_row(form.name)}}
+            <input type="submit" class="submit" name="submit" label="Enviar"/>
+    {{ form_end(form) }}
+</div>
+
+<script type="text/javascript">
+
+    //carga de anexos
+    function crearDocAnexRecep() {
+       console.log("HOLA NEN");
+       var url = "{{path('vinculador')}} ";
+       var formulario = $("#gestionDocumentosAdjuntosContratos #contratosDocumentosVincular");
+       $.post(url, formulario, function (response) {
+            $(".general").html(response);
+       });
+    }
  
-{{form_start(form, {'action':'', 'method':'POST'})}}
-{{form_end(form)}}
+</script>

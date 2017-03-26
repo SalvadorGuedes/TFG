@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use generalBundle\Entity\Images;
 use generalBundle\Form\ImagesType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class generalController extends Controller
 {
@@ -29,7 +31,32 @@ class generalController extends Controller
     return $this->render('generalBundle::fileExplore.html.twig', array(
             'form' => $form->createView()
         ));
-}
+    
+    }
+    
+    /**
+     * @Route("/general/vinculador")
+     */
+    public function vinculadorAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $imagen = new Images();
+        $form = $this->createForm(ImagesType::class, $imagen);
+               
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $imagen->getName();
+            $extension = $file->guessExtension();
+            $fecha = new \DateTime();
+            $fileName = $fecha->format('YmdHis').'.'.$extension;
+            $file->move(
+                $this->getParameter('images_directory'),
+                $fileName
+            );
+        }
+        return $this->render('generalBundle::index.html.twig');
+    }
+
     
     
 }

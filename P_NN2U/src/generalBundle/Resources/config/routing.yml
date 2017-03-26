@@ -5,3 +5,7 @@ index:
 fileExplore:
     path: /general/form
     defaults: { _controller: generalBundle:general:form }
+    
+vinculador:
+    path: /general/vinculador
+    defaults: { _controller: generalBundle:general:vinculador }
