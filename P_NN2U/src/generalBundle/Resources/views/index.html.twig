@@ -1,3 +1,50 @@
 {# app/Resources/views/general/index.html.twig #}
+{% extends 'base.html.twig' %}
 
-<h1>Hola Mundo!</h1>
+{% block title %}Inicio{% endblock %}
+{% block stylesheets %}
+    <style>
+        body {margin: 0;}
+
+        ul.topnav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #507c5c;
+        }
+
+        ul.topnav li {float: left;}
+
+        ul.topnav li p {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            margin: 0;
+            text-decoration: none;
+        }
+
+        ul.topnav li p:hover:not(.active) {background-color: #73a599;}
+
+        ul.topnav li p.active {background-color: #009973;}
+
+        ul.topnav li.right {float: right;}
+
+        @media screen and (max-width: 600px){
+            ul.topnav li.right, 
+            ul.topnav li {float: none;}
+        }
+    </style>
+
+{% endblock %}
+{% block body %}
+    <ul class="topnav">
+        <li> <p class="active"> Inicio </p></li>
+        <li> <p> Conocenos </p></li>
+        <li> <p> Proyectos </p></li>
+        <li class="right"><p> Iniciar Sesión </p></li>
+    </ul>
+    <div>{{ render(controller('generalBundle:general:form')) }}</div>
+    
+{% endblock %}

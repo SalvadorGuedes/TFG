@@ -8,5 +8,5 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     app.images_uploader:
-           class: generalBundle\Controller\FileUploader
+           class: generalBundle\Controller\FileUploaderController
            arguments: ['%images_directory%']

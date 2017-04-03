@@ -4,7 +4,7 @@ namespace generalBundle\Controller;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileUploader
+class FileUploaderController
 {
     private $targetDir;
 
