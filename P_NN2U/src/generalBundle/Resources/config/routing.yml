@@ -9,3 +9,7 @@ fileExplore:
 vinculador:
     path: /general/vinculador
     defaults: { _controller: generalBundle:general:vinculador }
+    
+picture:
+    path: /general/vinculador
+    defaults: { _controller: generalBundle:general:picture }

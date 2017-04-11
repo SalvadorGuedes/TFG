@@ -3,40 +3,7 @@
 
 {% block title %}Inicio{% endblock %}
 {% block stylesheets %}
-    <style>
-        body {margin: 0;}
-
-        ul.topnav {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #507c5c;
-        }
-
-        ul.topnav li {float: left;}
-
-        ul.topnav li p {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            margin: 0;
-            text-decoration: none;
-        }
-
-        ul.topnav li p:hover:not(.active) {background-color: #73a599;}
-
-        ul.topnav li p.active {background-color: #009973;}
-
-        ul.topnav li.right {float: right;}
-
-        @media screen and (max-width: 600px){
-            ul.topnav li.right, 
-            ul.topnav li {float: none;}
-        }
-    </style>
-
+    <link type="text/css" rel="stylesheet" href="{{ asset('/bundles/generalBundle/css/index.css') }}"/>
 {% endblock %}
 {% block body %}
     <ul class="topnav">
@@ -45,6 +12,24 @@
         <li> <p> Proyectos </p></li>
         <li class="right"><p> Iniciar Sesión </p></li>
     </ul>
-    <div>{{ render(controller('generalBundle:general:form')) }}</div>
     
+    <div class="flex-container">
+        <div class="contenido_izq">
+            <h1>IZQUIERDA</h1>
+        </div>
+
+        <div class="contenido_central">
+            <div>{{ render(controller('generalBundle:general:picture')) }}</div>
+        </div>
+
+        <div class="contenido_der">
+            <h1>DERECHA</h1>
+        </div>
+    </div>
+
+    <footer>
+      {#  {{ render(controller('generalBundle:general:form')) }}#}
+      <h1>YES</h1>
+    </footer>
+
 {% endblock %}
