@@ -2,10 +2,14 @@ index:
     path:   /general/index
     defaults: { _controller: generalBundle:general:index }
     
+index2:
+    path:   /general/index2
+    defaults: { _controller: generalBundle:general:index2 }
+    
 fileExplore:
     path: /general/form
     defaults: { _controller: generalBundle:general:form }
-    
+
 vinculador:
     path: /general/vinculador
     defaults: { _controller: generalBundle:general:vinculador }
@@ -13,3 +17,15 @@ vinculador:
 picture:
     path: /general/vinculador
     defaults: { _controller: generalBundle:general:picture }
+    
+formulariobusqueda:
+    path: /general/formulariobusqueda
+    defaults: { _controller: generalBundle:general:formulariobusqueda }
+    
+busqueda:
+    path: /general/busqueda
+    defaults: { _controller: generalBundle:general:busqueda }
+ 
+conocenos:
+    path: /general/conocenos
+    defaults: { _controller: generalBundle:general:conocenos }

@@ -1,0 +1,11 @@
+{# empty Twig template #}
+<p> HOLA MUNDO </p>
+
+{{ form_start(form, {'action': path("busqueda"), 'method': 'POST'})}}
+    <div class="formulario_busqueda">
+        {{ form_row(form.name, {'label' : 'Búsqueda'})}}
+        {{ form_widget(form.name) }}
+        {{ form_errors(form.name) }}
+        <button class="button"><span> Enviar </span></button>
+    </div>
+{{ form_end(form) }}

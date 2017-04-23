@@ -1,0 +1,21 @@
+{# app/Resources/views/general/index.html.twig #}
+<h1>PRUEBA</h1>
+{% set  imagen = 'uploads/images/' ~ ruta_imagen %}
+
+<div>
+    <div id="cargando" style="width: 100%; height: 100%; text-align: center">
+                <li class="loading">
+                    <p class="loading-bar"></p>
+                    <p class="loading-bar"></p>
+                    <p class="loading-bar"></p>
+                    <p class="loading-bar"></p>
+                </li>
+    </div>
+    <img class="imagen" src="{{ asset(imagen) }}" />
+</div>
+
+<div class="lista_botones">
+    {{ render(controller('generalBundle:general:form')) }}
+    <button class="button"><span> Sacar Foto </span></button>
+</div>
+

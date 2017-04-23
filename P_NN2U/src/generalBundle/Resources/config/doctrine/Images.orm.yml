@@ -12,7 +12,4 @@ generalBundle\Entity\Images:
         name:
             type: string
             length: 255
-        extension:
-            type: string
-            length: '10'
     lifecycleCallbacks: {  }

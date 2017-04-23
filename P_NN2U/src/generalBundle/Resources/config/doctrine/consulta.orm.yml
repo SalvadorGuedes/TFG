@@ -1,0 +1,23 @@
+generalBundle\Entity\consulta:
+    type: entity
+    table: null
+    repositoryClass: generalBundle\Repository\consultaRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        ip:
+            type: string
+            length: 255
+        puerto:
+            type: string
+            length: 255
+        activo:
+            type: boolean
+    lifecycleCallbacks: {  }

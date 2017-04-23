@@ -7,7 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use generalBundle\Entity\Images;
+use generalBundle\Entity\consulta;
 use generalBundle\Form\ImagesType;
+use generalBundle\Form\BusquedaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class generalController extends Controller {
@@ -17,6 +19,13 @@ class generalController extends Controller {
      */
     public function indexAction() {
         return $this->render('generalBundle::index.html.twig');
+    }
+
+    /**
+     * @Route("/general/index2")
+     */
+    public function index2Action() {
+        return $this->render('generalBundle::index2.html.twig');
     }
 
     /**
@@ -35,8 +44,10 @@ class generalController extends Controller {
      * @Route("/general/picture")
      */
     public function pictureAction(Request $request) {
-        $ruta = "base.png";
-        return $this->render('generalBundle::base.html.twig', array('ruta_imagen' => $ruta ));
+        $ruta = "upload_fichero.png";
+//        $ruta = "foto1.jpg";
+
+        return $this->render('generalBundle::central.html.twig', array('ruta_imagen' => $ruta));
     }
 
     /**
@@ -59,6 +70,36 @@ class generalController extends Controller {
             );
         }
         return $this->render('generalBundle::index.html.twig');
+    }
+
+    /**
+     * @Route("/general/formulariobusqueda")
+     */
+    public function formulariobusquedaAction(Request $request) {
+        $consulta = new consulta();
+        $form = $this->createForm(BusquedaType::class, $consulta);
+        return $this->render('generalBundle::formulariobusqueda.html.twig', array(
+                    'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/general/busqueda")
+     */
+    public function busquedaAction(Request $request) {
+        $consulta = new consulta();
+        $form = $this->createForm(BusquedaType::class, $consulta);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            print_r($consulta->getName());die();
+        }
+    }
+
+    /**
+     * @Route("/general/conocenos")
+     */
+    public function conocenosAction() {
+        return $this->render('generalBundle::conocenos.html.twig');
     }
 
 }
