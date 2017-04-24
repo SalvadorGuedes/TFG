@@ -68,6 +68,9 @@ class generalController extends Controller {
             $file->move(
                     $this->getParameter('images_directory'), $fileName
             );
+//            $imagen->setName($fileName);
+//            $em->persist($imagen);
+//            $em->flush();
         }
         return $this->render('generalBundle::index.html.twig');
     }

@@ -1,6 +1,7 @@
 {{ form_start(form, {'action': path("vinculador"), 'method': 'POST'}) }}
-    {{form_row(form.name)}}
-    <button class="button" onclick="prueba(document.getElementById('images_name').value)"><span> Browse... </span></button>
+    <button class="button" onclick="prueba(document.getElementById('images_name').value)">
+    {{form_row(form.name, { 'attr': {'class': 'upload'} })}}
+    <span> Subir Foto </span></button>
     <button class="button"><span> Enviar </span></button>
 {{ form_end(form) }}
 
