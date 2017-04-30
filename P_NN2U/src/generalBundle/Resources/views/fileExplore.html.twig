@@ -1,23 +1,28 @@
 {{ form_start(form, {'action': path("vinculador"), 'method': 'POST'}) }}
-    <button class="button" onclick="prueba(document.getElementById('images_name').value)">
-    {{form_row(form.name, { 'attr': {'class': 'upload'} })}}
-    <span> Subir Foto </span></button>
+    <button class="button">
+        {{form_row(form.name, { 'attr': {'class': 'upload'} })}}
+        <span id="envio"> Subir Foto </span>
+    </button>
     <button class="button"><span> Enviar </span></button>
 {{ form_end(form) }}
 
+<script>
 
-<script type="text/javascript">
-    //carga de anexos
-    function prueba() {
-        document.getElementById('images_name').click();
+    $(document).ready(function () {
+        console.log("LISTO_file");
 
-    }
+        $(document).on('click', '#envio', function () {
+            console.log("SELECCION");
+            document.getElementById('images_name').click();
+        });
 
-    {#    function crearDocAnexRecep() {
-            var url = "{{path('vinculador')}} ";
-            var formulario = $("#gestionDocumentosAdjuntosContratos #contratosDocumentosVincular");
-            $.post(url, formulario, function (response) {
-                $(".formulario").html(response);
-            });
-        }#}
+
+
+        $("#images_name").change(function () {
+
+            console.log("ENVIO");
+            console.log($("#images_name").val());
+        });
+
+    });
 </script>

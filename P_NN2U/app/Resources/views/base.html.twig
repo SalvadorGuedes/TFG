@@ -11,14 +11,8 @@
 <body onload="document.getElementById('cargando').style.display = 'none';">
     {% block body %}
         <ul class="topnav">
-            <li class="active" id="Inicio" onclick="displayPage('Inicio')"> <p> Inicio </p></li>
-            <li id="Conocenos" onclick="displayPage('Conocenos')"> <p> Conocenos </p></li>
-                {# <li class="loading">
-                     <p class="loading-bar"></p>
-                     <p class="loading-bar"></p>
-                     <p class="loading-bar"></p>
-                     <p class="loading-bar"></p></li>
-                 <li class="spinner"></li>#}
+            <li class="active" id="Inicio"> <p> Inicio </p></li>
+            <li id="Conocenos"> <p> Conocenos </p></li>
             <li class="right"><p> Iniciar Sesión </p></li>
         </ul>
     {% endblock %}
@@ -27,34 +21,41 @@
 </html>
 
 <script>
-    function displayPage($select) {
+
+    $(document).ready(function () {
+        console.log("LISTO");
         var $loading = "<li class=\"spinner\"></li>";
-        if ($select == 'Inicio') {
-            document.getElementById($select).innerHTML = $loading;
+
+        $("#Inicio").click(function () {
+            console.log("INICIO");
+            document.getElementById("Inicio").innerHTML = $loading;
             $.ajax({
                 type: "POST",
                 url: "/general/index2",
                 data: {}
-            }).done(function (msg) {
+            }).success(function (msg) {
                 $('#Conocenos').removeClass("active");
-                document.getElementById($select).innerHTML = "<p>" + $select + "</p>";
+                document.getElementById("Inicio").innerHTML = "<p>Inicio</p>";
                 $('#Inicio').addClass("active");
                 document.getElementById("Contenido").innerHTML = msg;
                 document.getElementById('cargando').style.display = 'none';
-            });
-        } else if ($select == 'Conocenos') {
-            document.getElementById($select).innerHTML = $loading;
+            })
+        });
+
+        $("#Conocenos").click(function () {
+            console.log("CONOCENOS");
+            document.getElementById("Conocenos").innerHTML = $loading;
             $.ajax({
                 type: "POST",
                 url: "/general/conocenos",
                 data: {}
-            }).done(function (msg) {
+            }).success(function (msg) {
                 $('#Inicio').removeClass("active");
-                document.getElementById($select).innerHTML = "<p>" + $select + "</p>";
+                document.getElementById("Conocenos").innerHTML = "<p>Conocenos</p>";
                 $('#Conocenos').addClass("active");
                 document.getElementById("Contenido").innerHTML = msg;
-            });
-        }
+            })
+        });
 
-    }
+    });
 </script>
