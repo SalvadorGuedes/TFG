@@ -1,10 +1,10 @@
 index:
-    path:   /general/index
-    defaults: { _controller: generalBundle:general:index }
+    path:   /general/index/{imagen}
+    defaults: { _controller: generalBundle:general:index, imagen: upload_fichero.png}
     
 index2:
-    path:   /general/index2
-    defaults: { _controller: generalBundle:general:index2 }
+    path:   /general/index2/{imagen}
+    defaults: { _controller: generalBundle:general:index2, imagen: upload_fichero.png}
     
 fileExplore:
     path: /general/form
@@ -15,8 +15,8 @@ vinculador:
     defaults: { _controller: generalBundle:general:vinculador }
     
 picture:
-    path: /general/vinculador
-    defaults: { _controller: generalBundle:general:picture }
+    path: /general/vinculador/{imagen}
+    defaults: { _controller: generalBundle:general:picture , imagen: upload_fichero.png }
     
 formulariobusqueda:
     path: /general/formulariobusqueda

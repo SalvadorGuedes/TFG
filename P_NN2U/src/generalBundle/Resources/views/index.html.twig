@@ -10,14 +10,15 @@
     <div id="Contenido" class="flex-container">
         <div class="contenido_izq">           
             <h1>IZQUIERDA</h1>
-                {{ render(controller('generalBundle:general:formulariobusqueda')) }}
+            {{ render(controller('generalBundle:general:formulariobusqueda')) }}
         </div>
 
         <div class="contenido_central">
-            {{ render(controller('generalBundle:general:picture')) }}
+            {{ render(controller('generalBundle:general:picture', { 'imagen': ruta_imagen })) }}
+            {#            {{ render(controller('generalBundle:general:picture')) }}#}
         </div>
     </div>
     <footer> 
-      <p id = "demo">YES</p>
+        <p id = "demo">YES</p>
     </footer>
 {% endblock %}

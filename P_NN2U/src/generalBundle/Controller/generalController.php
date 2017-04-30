@@ -17,15 +17,15 @@ class generalController extends Controller {
     /**
      * @Route("/general/index")
      */
-    public function indexAction() {
-        return $this->render('generalBundle::index.html.twig');
+    public function indexAction($imagen) {
+        return $this->render('generalBundle::index.html.twig', array('ruta_imagen' => $imagen));
     }
 
     /**
      * @Route("/general/index2")
      */
-    public function index2Action() {
-        return $this->render('generalBundle::index2.html.twig');
+    public function index2Action($imagen) {
+        return $this->render('generalBundle::index2.html.twig', array('ruta_imagen' => $imagen));
     }
 
     /**
@@ -43,11 +43,10 @@ class generalController extends Controller {
     /**
      * @Route("/general/picture")
      */
-    public function pictureAction(Request $request) {
-        $ruta = "upload_fichero.png";
-//        $ruta = "foto1.jpg";
+    public function pictureAction($imagen) {
+        
 
-        return $this->render('generalBundle::central.html.twig', array('ruta_imagen' => $ruta));
+        return $this->render('generalBundle::central.html.twig', array('ruta_imagen' => $imagen));
     }
 
     /**
@@ -72,7 +71,7 @@ class generalController extends Controller {
 //            $em->persist($imagen);
 //            $em->flush();
         }
-        return $this->render('generalBundle::index.html.twig');
+        return $this->render('generalBundle::index.html.twig', array('ruta_imagen' => $fileName));
     }
 
     /**

@@ -1,10 +1,8 @@
-<ul class="topnav"><li></li></ul>
-<div class="contenido_izq">
-
+<div class="contenido_izq">           
     <h1>IZQUIERDA</h1>
     {{ render(controller('generalBundle:general:formulariobusqueda')) }}
 </div>
 
 <div class="contenido_central">
-    {{ render(controller('generalBundle:general:picture')) }}
+    {{ render(controller('generalBundle:general:picture', { 'imagen': ruta_imagen })) }}
 </div>

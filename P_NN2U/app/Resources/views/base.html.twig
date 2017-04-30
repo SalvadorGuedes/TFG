@@ -8,17 +8,17 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 </head>
-<body onload="document.getElementById('cargando').style. display='none';">
+<body onload="document.getElementById('cargando').style.display = 'none';">
     {% block body %}
         <ul class="topnav">
-            <li class="active" id="Inicio" onclick="displayDate('Inicio')"> <p> Inicio </p></li>
-            <li id="Conocenos" onclick="displayDate('Conocenos')"> <p> Conocenos </p></li>
-           {# <li class="loading">
-                <p class="loading-bar"></p>
-                <p class="loading-bar"></p>
-                <p class="loading-bar"></p>
-                <p class="loading-bar"></p></li>
-            <li class="spinner"></li>#}
+            <li class="active" id="Inicio" onclick="displayPage('Inicio')"> <p> Inicio </p></li>
+            <li id="Conocenos" onclick="displayPage('Conocenos')"> <p> Conocenos </p></li>
+                {# <li class="loading">
+                     <p class="loading-bar"></p>
+                     <p class="loading-bar"></p>
+                     <p class="loading-bar"></p>
+                     <p class="loading-bar"></p></li>
+                 <li class="spinner"></li>#}
             <li class="right"><p> Iniciar Sesión </p></li>
         </ul>
     {% endblock %}
@@ -27,7 +27,7 @@
 </html>
 
 <script>
-    function displayDate($select) {
+    function displayPage($select) {
         var $loading = "<li class=\"spinner\"></li>";
         if ($select == 'Inicio') {
             document.getElementById($select).innerHTML = $loading;
@@ -40,6 +40,7 @@
                 document.getElementById($select).innerHTML = "<p>" + $select + "</p>";
                 $('#Inicio').addClass("active");
                 document.getElementById("Contenido").innerHTML = msg;
+                document.getElementById('cargando').style.display = 'none';
             });
         } else if ($select == 'Conocenos') {
             document.getElementById($select).innerHTML = $loading;
