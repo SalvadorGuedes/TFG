@@ -5,24 +5,3 @@
     </button>
     <button class="button"><span> Enviar </span></button>
 {{ form_end(form) }}
-
-<script>
-
-    $(document).ready(function () {
-        console.log("LISTO_file");
-
-        $(document).on('click', '#envio', function () {
-            console.log("SELECCION");
-            document.getElementById('images_name').click();
-        });
-
-
-
-        $("#images_name").change(function () {
-
-            console.log("ENVIO");
-            console.log($("#images_name").val());
-        });
-
-    });
-</script>

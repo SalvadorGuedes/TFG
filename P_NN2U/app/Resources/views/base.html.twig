@@ -23,7 +23,6 @@
 <script>
 
     $(document).ready(function () {
-        console.log("LISTO");
         var $loading = "<li class=\"spinner\"></li>";
 
         $("#Inicio").click(function () {
@@ -55,6 +54,16 @@
                 $('#Conocenos').addClass("active");
                 document.getElementById("Contenido").innerHTML = msg;
             })
+        });
+        
+        $(document).on('click', '#envio', function () {
+            console.log("SELECCION");
+            document.getElementById('images_name').click();
+        });
+
+        $(document).on('change', '#images_name', function () {
+            console.log("ENVIO");
+            console.log($("#images_name").val());
         });
 
     });
