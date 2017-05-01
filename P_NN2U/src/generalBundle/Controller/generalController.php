@@ -11,6 +11,7 @@ use generalBundle\Entity\consulta;
 use generalBundle\Form\ImagesType;
 use generalBundle\Form\BusquedaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class generalController extends Controller {
 
@@ -44,7 +45,7 @@ class generalController extends Controller {
      * @Route("/general/picture")
      */
     public function pictureAction($imagen) {
-        
+
 
         return $this->render('generalBundle::central.html.twig', array('ruta_imagen' => $imagen));
     }
@@ -53,25 +54,32 @@ class generalController extends Controller {
      * @Route("/general/vinculador")
      */
     public function vinculadorAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $imagen = new Images();
-        $form = $this->createForm(ImagesType::class, $imagen);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $file = $imagen->getName();
-            $extension = $file->guessExtension();
-            $fecha = new \DateTime();
-            $fileName = $fecha->format('YmdHis') . '.' . $extension;
-            $file->move(
-                    $this->getParameter('images_directory'), $fileName
-            );
-//            $imagen->setName($fileName);
-//            $em->persist($imagen);
-//            $em->flush();
+//        $em = $this->getDoctrine()->getManager();
+//        $imagen = new Images();
+//        $form = $this->createForm(ImagesType::class, $imagen);
+//
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $file = $imagen->getName();
+//            $extension = $file->guessExtension();
+//            $fecha = new \DateTime();
+//            $fileName = $fecha->format('YmdHis') . '.' . $extension;
+//            $file->move(
+//                    $this->getParameter('images_directory'), $fileName
+//            );
+////            $imagen->setName($fileName);
+////            $em->persist($imagen);
+////            $em->flush();
+//        }
+//        return $this->render('generalBundle::index.html.twig', array('ruta_imagen' => $fileName));
+        if ($request->isXMLHttpRequest()) {
+//            return new JsonResponse(array('data' => $this->render('generalBundle::conocenos.html.twig')));
+//            return $this->render('generalBundle::index.html.twig', array('ruta_imagen' => 'upload_fichero.png'));
+            return $this->render('generalBundle::conocenos.html.twig');
         }
-        return $this->render('generalBundle::index.html.twig', array('ruta_imagen' => $fileName));
+
+        return new Response('This is not ajax!', 400);
     }
 
     /**
@@ -93,7 +101,8 @@ class generalController extends Controller {
         $form = $this->createForm(BusquedaType::class, $consulta);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            print_r($consulta->getName());die();
+            print_r($consulta->getName());
+            die();
         }
     }
 

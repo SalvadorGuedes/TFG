@@ -1,7 +1,7 @@
 {{ form_start(form, {'action': path("vinculador"), 'method': 'POST'}) }}
-    <button class="button">
+<div>
         {{form_row(form.name, { 'attr': {'class': 'upload'} })}}
-        <span id="envio"> Subir Foto </span>
-    </button>
-    <button class="button"><span> Enviar </span></button>
+        <button class="button" id="envio"><span > Subir Foto </span> </button>
+</div>
+{#    <button class="button"><span> Enviar </span></button>#}
 {{ form_end(form) }}

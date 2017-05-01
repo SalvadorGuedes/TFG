@@ -55,7 +55,7 @@
                 document.getElementById("Contenido").innerHTML = msg;
             })
         });
-        
+
         $(document).on('click', '#envio', function () {
             console.log("SELECCION");
             document.getElementById('images_name').click();
@@ -64,6 +64,18 @@
         $(document).on('change', '#images_name', function () {
             console.log("ENVIO");
             console.log($("#images_name").val());
+            $.ajax({
+                type: "POST",
+                url: "/general/vinculador",
+                data: {
+                    name: $("#images_name").val()
+                },
+                success: function (response) {
+                    console.log("VOLVI");
+                    document.getElementById("Contenido").innerHTML = response;
+                }
+            })
+             console.log("ENVIO 2");
         });
 
     });
