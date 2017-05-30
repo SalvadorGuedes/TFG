@@ -12,10 +12,7 @@ generalBundle\Entity\consulta:
         name:
             type: string
             length: 255
-        ip:
-            type: string
-            length: 255
-        puerto:
+        ruta:
             type: string
             length: 255
         activo:

@@ -13,7 +13,7 @@
         <ul class="topnav">
             <li class="active" id="Inicio"> <p> Inicio </p></li>
             <li id="Conocenos"> <p> Conocenos </p></li>
-            <li class="right"><p> Iniciar Sesión </p></li>
+{#            <li class="right"><p> Iniciar Sesión </p></li>#}
         </ul>
     {% endblock %}
 {% block javascripts %}{% endblock %}
@@ -24,6 +24,7 @@
 
     $(document).ready(function () {
         var $loading = "<li class=\"spinner\"></li>";
+        var $loading2 = "<li class=\"spinner2\"></li>";
 
         $("#Inicio").click(function () {
             console.log("INICIO");
@@ -60,22 +61,35 @@
             console.log("SELECCION");
             document.getElementById('images_name').click();
         });
-
-        $(document).on('change', '#images_name', function () {
-            console.log("ENVIO");
-            console.log($("#images_name").val());
+        
+        $(document).on('click', '#llamada', function () {
+            document.getElementById("llamada").innerHTML = $loading2;
             $.ajax({
                 type: "POST",
-                url: "/general/vinculador",
+                url: "/general/llamada",
                 data: {
-                    name: $("#images_name").val()
+                    busqueda: $('input:radio[name="busqueda[name]"]:checked').val()
                 },
                 success: function (response) {
-                    console.log("VOLVI");
-                    document.getElementById("Contenido").innerHTML = response;
+                    console.log("OK: LLAMADA");
+                    document.getElementById("llamada").innerHTML = "<span> LLAMADA </span>"; 
+                    document.getElementById("modal").innerHTML = "<h2>Resultados</h2><p>" + response + "</p><a class=\"popup-cerrar\" href=\"#\">X</a>"; 
+                    document.getElementById("miEnlace").click();        
+
+                    
+                },
+                error: function (response) {   
+                    document.getElementById("llamada").innerHTML = "<span> LLAMADA </span>"; 
+                    console.log("ERROR: LLAMADA");
+                    document.getElementById("modal").innerHTML = "<h2>Resultados</h2><p>Error al realizar la petición al servidor intentelo más tarde</p><a class=\"popup-cerrar\" href=\"#\">X</a>"; 
+                    document.getElementById("miEnlace").click();
                 }
             })
-             console.log("ENVIO 2");
+        });
+
+        $(document).on('change', '#images_name', function () {
+            document.getElementById("envio").innerHTML = $loading2;
+            document.getElementById('enviar_foto').click();
         });
 
     });

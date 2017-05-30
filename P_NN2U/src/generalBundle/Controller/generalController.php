@@ -23,6 +23,25 @@ class generalController extends Controller {
     }
 
     /**
+     * @Route("/general/llamada")
+     */
+    public function llamadaAction(Request $request) {
+        //exec("python C:\Users\Salvador\Desktop\hola.py", $output);
+        $id_llamada = $request->request->get("busqueda");
+        $em = $this->getDoctrine()->getManager();
+        $llamada = $em->getRepository('generalBundle:consulta')->find($id_llamada);
+        if (!$llamada) {
+            throw $this->createNotFoundException(
+                    'Error parámetro de nusqueda no encontrado' . $id
+            );
+        }
+        exec($llamada->getRuta(), $output);
+        $result = "El resultado obtenido es: " . $output[0];
+        $response = new Response($result);
+        return $response;
+    }
+
+    /**
      * @Route("/general/index2")
      */
     public function index2Action($imagen) {
@@ -45,8 +64,6 @@ class generalController extends Controller {
      * @Route("/general/picture")
      */
     public function pictureAction($imagen) {
-
-
         return $this->render('generalBundle::central.html.twig', array('ruta_imagen' => $imagen));
     }
 
@@ -54,32 +71,38 @@ class generalController extends Controller {
      * @Route("/general/vinculador")
      */
     public function vinculadorAction(Request $request) {
-//        $em = $this->getDoctrine()->getManager();
-//        $imagen = new Images();
-//        $form = $this->createForm(ImagesType::class, $imagen);
-//
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $file = $imagen->getName();
-//            $extension = $file->guessExtension();
-//            $fecha = new \DateTime();
-//            $fileName = $fecha->format('YmdHis') . '.' . $extension;
-//            $file->move(
-//                    $this->getParameter('images_directory'), $fileName
-//            );
-////            $imagen->setName($fileName);
-////            $em->persist($imagen);
-////            $em->flush();
-//        }
-//        return $this->render('generalBundle::index.html.twig', array('ruta_imagen' => $fileName));
-        if ($request->isXMLHttpRequest()) {
-//            return new JsonResponse(array('data' => $this->render('generalBundle::conocenos.html.twig')));
-//            return $this->render('generalBundle::index.html.twig', array('ruta_imagen' => 'upload_fichero.png'));
-            return $this->render('generalBundle::conocenos.html.twig');
-        }
+        $em = $this->getDoctrine()->getManager();
+        $imagen = new Images();
+        $form = $this->createForm(ImagesType::class, $imagen);
 
-        return new Response('This is not ajax!', 400);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $imagen->getName();
+            $extension = $file->guessExtension();
+            $fecha = new \DateTime();
+            $fileName = $fecha->format('YmdHis') . '.' . $extension;
+            $file->move(
+                    $this->getParameter('images_directory'), $fileName
+            );
+            $imagen->setName($fileName);
+            $em->persist($imagen);
+            $em->flush();
+        }
+        return $this->render('generalBundle::index.html.twig', array('ruta_imagen' => $fileName));
+//        if ($request->isXMLHttpRequest()) {
+//            $file = $request->request->get("name") ;
+//            $file->move(
+//                    $this->getParameter('images_directory'), 'aaaa'
+//            );
+//                    print_r("PRUEBAS SASASA");
+//            die();
+////            return new JsonResponse(array('data' => $this->render('generalBundle::conocenos.html.twig')));
+////            return $this->render('generalBundle::index.html.twig', array('ruta_imagen' => 'upload_fichero.png'));
+//            return $this->render('generalBundle::conocenos.html.twig');
+//        }
+//
+//        return new Response('This is not ajax!', 400);
     }
 
     /**

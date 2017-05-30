@@ -20,12 +20,7 @@ class consulta
     /**
      * @var string
      */
-    private $ip;
-
-    /**
-     * @var string
-     */
-    private $puerto;
+    private $ruta;
 
     /**
      * @var bool
@@ -68,51 +63,27 @@ class consulta
     }
 
     /**
-     * Set ip
+     * Set ruta
      *
-     * @param string $ip
+     * @param string $ruta
      *
      * @return consulta
      */
-    public function setIp($ip)
+    public function setRuta($ruta)
     {
-        $this->ip = $ip;
+        $this->ruta = $ruta;
 
         return $this;
     }
 
     /**
-     * Get ip
+     * Get ruta
      *
      * @return string
      */
-    public function getIp()
+    public function getRuta()
     {
-        return $this->ip;
-    }
-
-    /**
-     * Set puerto
-     *
-     * @param string $puerto
-     *
-     * @return consulta
-     */
-    public function setPuerto($puerto)
-    {
-        $this->puerto = $puerto;
-
-        return $this;
-    }
-
-    /**
-     * Get puerto
-     *
-     * @return string
-     */
-    public function getPuerto()
-    {
-        return $this->puerto;
+        return $this->ruta;
     }
 
     /**

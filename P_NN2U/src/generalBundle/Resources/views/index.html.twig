@@ -14,8 +14,8 @@
         </div>
 
         <div class="contenido_central">
+            <p id="foto_solicitada"> {{ ruta_imagen }} </p>
             {{ render(controller('generalBundle:general:picture', { 'imagen': ruta_imagen })) }}
-            {#            {{ render(controller('generalBundle:general:picture')) }}#}
         </div>
     </div>
     <footer> 

@@ -29,3 +29,7 @@ busqueda:
 conocenos:
     path: /general/conocenos
     defaults: { _controller: generalBundle:general:conocenos }
+    
+llamada:
+    path:   /general/llamada
+    defaults: { _controller: generalBundle:general:llamada }
