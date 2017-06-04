@@ -7,7 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use generalBundle\Entity\Images;
-use generalBundle\Entity\consulta;
+use generalBundle\Entity\Consulta;
+use generalBundle\Entity\Peticiones;
 use generalBundle\Form\ImagesType;
 use generalBundle\Form\BusquedaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,18 +27,35 @@ class generalController extends Controller {
      * @Route("/general/llamada")
      */
     public function llamadaAction(Request $request) {
-        //exec("python C:\Users\Salvador\Desktop\hola.py", $output);
         $id_llamada = $request->request->get("busqueda");
+        $foto_name = $request->request->get("foto");
         $em = $this->getDoctrine()->getManager();
-        $llamada = $em->getRepository('generalBundle:consulta')->find($id_llamada);
+        $llamada = $em->getRepository('generalBundle:Consulta')->findBy( array('id' => $id_llamada ));
+        $foto = $em->getRepository('generalBundle:Images')->findBy( array('name' => trim($foto_name, " ") ));
+        
+        
+        $mensaje = "";
         if (!$llamada) {
-            throw $this->createNotFoundException(
-                    'Error parámetro de nusqueda no encontrado' . $id
-            );
+            $mensaje = 'Debe seleccionar una opción'; 
         }
-        exec($llamada->getRuta(), $output);
-        $result = "El resultado obtenido es: " . $output[0];
-        $response = new Response($result);
+        if (!$foto) {
+            $mensaje = 'Foto no encontrada, vuelva a cargar la foto'; 
+        }
+        $salida = "ERROR";
+        $peticion = -1;
+        if($mensaje == ""){
+            $peticion = new Peticiones();
+            $peticion->setIdconsulta($llamada[0]);
+            $peticion->setIdimagen($foto[0]);
+            $em->persist($peticion);
+            $em->flush();
+
+            exec($llamada[0]->getRuta(), $output);
+            $salida = $output[0];
+            $peticion = $peticion->getIdpeticiones();
+        }
+        
+        $response = new Response(json_encode(array('resultado' => $salida, 'peticion' => $peticion , 'mensaje' => $mensaje)));
         return $response;
     }
 
@@ -109,7 +127,7 @@ class generalController extends Controller {
      * @Route("/general/formulariobusqueda")
      */
     public function formulariobusquedaAction(Request $request) {
-        $consulta = new consulta();
+        $consulta = new Consulta();
         $form = $this->createForm(BusquedaType::class, $consulta);
         return $this->render('generalBundle::formulariobusqueda.html.twig', array(
                     'form' => $form->createView()
@@ -120,7 +138,7 @@ class generalController extends Controller {
      * @Route("/general/busqueda")
      */
     public function busquedaAction(Request $request) {
-        $consulta = new consulta();
+        $consulta = new Consulta();
         $form = $this->createForm(BusquedaType::class, $consulta);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

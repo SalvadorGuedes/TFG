@@ -8,9 +8,11 @@
 {% block body %}
     {{parent()}}
     <div id="Contenido" class="flex-container">
-        <div class="contenido_izq">           
-            <h1>IZQUIERDA</h1>
-            {{ render(controller('generalBundle:general:formulariobusqueda')) }}
+        <div class="contenido_izq">  
+            <div class="center">
+                <h1>Búsqueda</h1>
+                {{ render(controller('generalBundle:general:formulariobusqueda')) }}
+            </div>
         </div>
 
         <div class="contenido_central">
@@ -18,7 +20,7 @@
             {{ render(controller('generalBundle:general:picture', { 'imagen': ruta_imagen })) }}
         </div>
     </div>
-    <footer> 
+    {#<footer> 
         <p id = "demo">YES</p>
-    </footer>
+    </footer>#}
 {% endblock %}

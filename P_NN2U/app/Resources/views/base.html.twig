@@ -64,27 +64,42 @@
         
         $(document).on('click', '#llamada', function () {
             document.getElementById("llamada").innerHTML = $loading2;
+            $cabecera = '<h2>Resultados</h2>';
+            $botones = '<div class="lista_botones"> <button class="button" id="acierto"><span> Sí </span></button>  <button class="button" id="fallo"><span> No </span></button> </div>';
+            $cerrar = '<a class=\"popup-cerrar\" href=\"#\">X</a>';
             $.ajax({
                 type: "POST",
                 url: "/general/llamada",
                 data: {
-                    busqueda: $('input:radio[name="busqueda[name]"]:checked').val()
+                    busqueda: $('input:radio[name="busqueda[name]"]:checked').val(),
+                    foto: $(foto_solicitada).text()
                 },
                 success: function (response) {
-                    console.log("OK: LLAMADA");
+                    var a = JSON.parse(response);
+                    console.log("OK: LLAMADA -> Peticion: ");
                     document.getElementById("llamada").innerHTML = "<span> LLAMADA </span>"; 
-                    document.getElementById("modal").innerHTML = "<h2>Resultados</h2><p>" + response + "</p><a class=\"popup-cerrar\" href=\"#\">X</a>"; 
-                    document.getElementById("miEnlace").click();        
-
+                    if(a.resultado == "ERROR"){
+                        document.getElementById("modal").innerHTML = "<h2>Error</h2><p>" + a.mensaje + "</p> " + $cerrar; 
+                    }else{
+                        document.getElementById("modal").innerHTML = $cabecera + "<p>" + a.resultado + "</p> " + $botones + $cerrar; 
+                    }
                     
+                    document.getElementById("miEnlace").click();
+                    document.getElementById("popup").style.display = "initial";
                 },
-                error: function (response) {   
+                error: function () {  
                     document.getElementById("llamada").innerHTML = "<span> LLAMADA </span>"; 
                     console.log("ERROR: LLAMADA");
-                    document.getElementById("modal").innerHTML = "<h2>Resultados</h2><p>Error al realizar la petición al servidor intentelo más tarde</p><a class=\"popup-cerrar\" href=\"#\">X</a>"; 
+                    document.getElementById("modal").innerHTML = $cabecera + "<p>Error al realizar la petición al servidor intentelo más tarde</p> " + $cerrar; 
                     document.getElementById("miEnlace").click();
+                    document.getElementById("popup").style.display = "initial";
                 }
             })
+        });
+
+        $(document).on('click', '.popup-cerrar', function () {
+            console.log("CERRAR POPUP");
+            document.getElementById("popup").style.display = "none";
         });
 
         $(document).on('change', '#images_name', function () {

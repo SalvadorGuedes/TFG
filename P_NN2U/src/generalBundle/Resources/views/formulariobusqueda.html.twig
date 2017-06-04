@@ -1,13 +1,10 @@
 {# empty Twig template #}
 {{ form_start(form, {'action': path("busqueda"), 'method': 'POST'})}}
-<div>
-    {% for busqueda in form.name %}
-        <label class="check">
-            {{ form_errors(busqueda) }}
-            {{ form_widget(busqueda, { 'attr': {'id': 'busqueda_name_si'} })  }}
-            <span>{{ busqueda.vars.label }}</span>
-        </label>
-    {% endfor %}
-{#    <button class="button" id="enviar_bsuqueda"><span> Enviar </span></button>#}
-</div> 
+{% for busqueda in form.name %}
+    <label class="check">
+        {{ form_errors(busqueda) }}
+        {{ form_widget(busqueda, { 'attr': {'id': 'busqueda_name_si'} })  }}
+        <span>{{ busqueda.vars.label }}</span>
+    </label>
+{% endfor %}
 {{ form_end(form) }}

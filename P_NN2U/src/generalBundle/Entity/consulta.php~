@@ -2,140 +2,46 @@
 
 namespace generalBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * consulta
+ * Consulta
+ *
+ * @ORM\Table(name="consulta")
+ * @ORM\Entity
  */
-class consulta
+class Consulta
 {
     /**
-     * @var int
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @var string
-     */
-    private $ip;
-
-    /**
-     * @var string
-     */
-    private $puerto;
-
-    /**
-     * @var bool
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=false)
      */
     private $activo;
 
-
     /**
-     * Get id
+     * @var string
      *
-     * @return int
+     * @ORM\Column(name="ruta", type="string", length=255, nullable=false)
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $ruta;
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return consulta
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
 
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set ip
-     *
-     * @param string $ip
-     *
-     * @return consulta
-     */
-    public function setIp($ip)
-    {
-        $this->ip = $ip;
-
-        return $this;
-    }
-
-    /**
-     * Get ip
-     *
-     * @return string
-     */
-    public function getIp()
-    {
-        return $this->ip;
-    }
-
-    /**
-     * Set puerto
-     *
-     * @param string $puerto
-     *
-     * @return consulta
-     */
-    public function setPuerto($puerto)
-    {
-        $this->puerto = $puerto;
-
-        return $this;
-    }
-
-    /**
-     * Get puerto
-     *
-     * @return string
-     */
-    public function getPuerto()
-    {
-        return $this->puerto;
-    }
-
-    /**
-     * Set activo
-     *
-     * @param boolean $activo
-     *
-     * @return consulta
-     */
-    public function setActivo($activo)
-    {
-        $this->activo = $activo;
-
-        return $this;
-    }
-
-    /**
-     * Get activo
-     *
-     * @return bool
-     */
-    public function getActivo()
-    {
-        return $this->activo;
-    }
 }
+

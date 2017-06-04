@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use generalBundle\Entity\consulta;
+use generalBundle\Entity\Consulta;
 
 class BusquedaType extends AbstractType {
 
@@ -35,7 +35,7 @@ class BusquedaType extends AbstractType {
 
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => consulta::class
+            'data_class' => Consulta::class
         ));
     }
 

@@ -2,49 +2,51 @@
 
 namespace generalBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * consulta
+ * Consulta
+ *
+ * @ORM\Table(name="consulta")
+ * @ORM\Entity
  */
-class consulta
+class Consulta
 {
     /**
-     * @var int
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @var string
-     */
-    private $ruta;
-
-    /**
-     * @var bool
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=false)
      */
     private $activo;
 
-
     /**
-     * Get id
+     * @var string
      *
-     * @return int
+     * @ORM\Column(name="ruta", type="string", length=255, nullable=false)
      */
+    private $ruta;
+
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return consulta
-     */
     public function setName($name)
     {
         $this->name = $name;
@@ -52,23 +54,11 @@ class consulta
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * Set ruta
-     *
-     * @param string $ruta
-     *
-     * @return consulta
-     */
     public function setRuta($ruta)
     {
         $this->ruta = $ruta;
@@ -76,23 +66,11 @@ class consulta
         return $this;
     }
 
-    /**
-     * Get ruta
-     *
-     * @return string
-     */
     public function getRuta()
     {
         return $this->ruta;
     }
 
-    /**
-     * Set activo
-     *
-     * @param boolean $activo
-     *
-     * @return consulta
-     */
     public function setActivo($activo)
     {
         $this->activo = $activo;
@@ -100,11 +78,6 @@ class consulta
         return $this;
     }
 
-    /**
-     * Get activo
-     *
-     * @return bool
-     */
     public function getActivo()
     {
         return $this->activo;
